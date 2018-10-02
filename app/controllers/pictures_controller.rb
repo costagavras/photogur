@@ -1,6 +1,8 @@
 class PicturesController < ApplicationController
   def index
     @pictures = Picture.all
+    @age_pictures_desc = Picture.oldest_last
+    # @created_before = Picture.created_before(time)
   end
 
   def show
@@ -40,7 +42,7 @@ class PicturesController < ApplicationController
   @picture.title = params[:picture][:title]
   @picture.artist = params[:picture][:artist]
   @picture.url = params[:picture][:url]
-
+  @picture.created_at = params[:picture][:created_at]
 
     if @picture.save
       redirect_to "/pictures/#{@picture.id}"
@@ -54,4 +56,5 @@ class PicturesController < ApplicationController
     @picture.destroy
     redirect_to "/pictures"
   end
+
 end
