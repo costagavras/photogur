@@ -1,0 +1,11 @@
+<h1>List of all users</h1>
+<hr>
+<h2><%= link_to("New User", "/users/new") %></h2>
+  -------------------------------------------------
+<br>
+<% @users.each do |us| %>
+  <h3>User id: <%= us.id %></h3>
+  <h4>User: <%= us.email %></h4>
+  <h4>Created at: <%= us.created_at %></h4>
+  -------------------------------------------------
+<% end %>
