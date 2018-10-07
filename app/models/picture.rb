@@ -13,7 +13,7 @@ class Picture < ApplicationRecord
   validates :url, uniqueness: { message: "is not unique!" }
 
 
-
+  belongs_to :user
 
 
 end
