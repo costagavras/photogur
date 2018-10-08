@@ -7,7 +7,9 @@ class PicturesController < ApplicationController
   def index
     @pictures = Picture.all
     @age_pictures_desc = Picture.oldest_last
-    # @created_before = Picture.created_before(time)
+    @created_before_1m = Picture.created_1m_before_now
+    @created_last_month = Picture.created_last_month
+    # @pictures_of_the_year = Picture.pictures_created_in_year(1676)
   end
 
   def load_picture

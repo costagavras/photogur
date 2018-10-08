@@ -1,8 +1,42 @@
 <h1>Pictures (<%= @pictures.length %>)</h1>
 <%= link_to("New Picture", "/pictures/new") %>
-
-<% @age_pictures_desc .each do |picture| %>
+<hr>
+<br>
+<% @created_last_month.each do |picture| %>
   <h2><%= picture.title %>, <%= picture.artist %></h2>
   <h3>Created at: <%= picture.created_at %></h3>
   <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %>
+<% end %>
+<br>
+<br>
+<hr>
+<h2><%= "Below are the #{@created_before_1m.count} pictures created before #{Date.current.last_month}." %></h2>
+<hr>
+<% @created_before_1m.each do |picture| %>
+  <h2><%= picture.title %>, <%= picture.artist %></h2>
+  <h3>Created at: <%= picture.created_at %></h3>
+  <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %>
+<% end %>
+<br>
+<br>
+<hr>
+<h2><%= "Below are the pictures in ascending choronological order by year" %></h2>
+<hr>
+<!-- can I put an instance variable instead of Picture.pictures_created_in_year(year) -->
+<% (1500..2018).each do |year| %>
+  <% i = 0 %>
+  <% Picture.pictures_created_in_year(year).each do |picture| %>
+    <% if Picture.pictures_created_in_year(year) != nil %>
+      <% i += 1 %>
+      <br>
+      <% if i == 1 %>
+        <h2><%= "This is the picture of #{year}" %></h2>
+        <br>
+      <% end %>
+      <h2><%= picture.title %>, <%= picture.artist %></h2>
+      <h3>Created at: <%= picture.created_at %></h3>
+      <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %>
+      <hr>
+    <% end %>
+  <% end %>
 <% end %>
